@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Purchase History</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet" />
+  <!-- Font Awesome (for icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <!-- Reuse your main stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="dark-mode" id="body">
+  <!-- Top Navbar -->
+  <nav class="top-nav">
+    <div class="logo">RoKham Shop</div>
+    <div class="hamburger" id="hamburger">
+      <i class="fa fa-bars"></i>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="allgames.html">All Games</a></li>
+      <li><a href="purchase-history.html">Purchase History</a></li>
+    </ul>
+    <button class="theme-toggle-btn" id="themeToggleBtn">
+      <i class="fa fa-sun"></i>
+    </button>
+  </nav>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="profile-section">
+      <div class="profile-picture"></div>
+      <h3 class="profile-name">Username</h3>
+    </div>
+    <ul class="sidebar-links">
+      <li><a href="index.html">Dashboard</a></li>
+      <li><a href="#">Orders</a></li>
+      <li><a href="#">Wallet</a></li>
+      <li><a href="#">Settings</a></li>
+      <li><a href="#">Logout</a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <section class="purchase-history-section">
+      <!-- Page Header -->
+      <div class="purchase-history-header">
+        <h2>รายการที่สั่งซื้อ</h2>
+        <button class="back-btn">ย้อนกลับ</button>
+      </div>
+
+      <!-- Filter Form -->
+      <form class="filter-form">
+        <div class="filter-row">
+          <!-- Date Range: Start -->
+          <div class="filter-group">
+            <label for="dateStart">วันที่สั่งซื้อ (เริ่ม)</label>
+            <input type="date" id="dateStart" value="2025-02-09" />
+          </div>
+          <!-- Date Range: End -->
+          <div class="filter-group">
+            <label for="dateEnd">วันที่สั่งซื้อ (สิ้นสุด)</label>
+            <input type="date" id="dateEnd" value="2025-02-16" />
+          </div>
+          <!-- Select Game -->
+          <div class="filter-group">
+            <label for="gameSelect">เลือกเกม</label>
+            <select id="gameSelect">
+              <option>เลือกเกม</option>
+              <option>RoV</option>
+              <option>PUBG</option>
+              <option>Valorant</option>
+              <option>Identity V</option>
+              <!-- Add more if needed -->
+            </select>
+          </div>
+          <!-- Select Status -->
+          <div class="filter-group">
+            <label for="statusSelect">สถานะ</label>
+            <select id="statusSelect">
+              <option>เลือกสถานะ</option>
+              <option>Pending</option>
+              <option>Completed</option>
+              <option>Cancelled</option>
+            </select>
+          </div>
+          <!-- Game UID -->
+          <div class="filter-group">
+            <label for="gameUid">Game UID</label>
+            <input type="text" id="gameUid" placeholder="Game UID" />
+          </div>
+          <!-- Search Button -->
+          <button type="submit" class="search-btn">ค้นหา</button>
+        </div>
+      </form>
+
+      <!-- Table Container for horizontal scrolling on small screens -->
+      <div class="purchase-table-container">
+        <table class="purchase-table">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>เลขที่ออเดอร์</th>
+              <th>ชื่อตัวละคร</th>
+              <th>เกม</th>
+              <th>เลเวล</th>
+              <th>Game UID</th>
+              <th>วันที่สั่งซื้อ</th>
+              <th>ราคาสินค้า (บาท)</th>
+              <th>สถานะ</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- If no data, show a single row with "No Data" -->
+            <tr>
+              <td colspan="10" class="no-data">No Data</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

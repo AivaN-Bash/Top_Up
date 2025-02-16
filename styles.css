@@ -1,0 +1,944 @@
+/*-------------------------------------------------
+  CSS VARIABLES & THEME OVERRIDES
+-------------------------------------------------*/
+:root {
+  /* Default theme variables */
+  --background-color: #ffffff;
+  --text-color: #333333;
+  /* Card BG references this var, so in dark mode it becomes black(ish). */
+  --card-bg-color: #f8f8f8;
+  --secondary-color: #ffc107;
+  --header-footer-bg: #ffffff;
+  --banner-overlay-bg: rgba(0, 0, 0, 0.3);
+
+  --font-family: 'Montserrat', sans-serif;
+  --transition-speed: 0.3s;
+  --transition-easing: ease-in-out;
+  --card-gap: 1.5rem; /* Adjust spacing between cards */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+
+  /* Show 5 items on very large screens */
+  --slider-items: 5;
+}
+
+/* Dark Mode Overrides */
+.dark-mode {
+  --background-color: #121212;
+  --text-color: #f4f4f4;
+  --card-bg-color: #1f1f1f;
+  --header-footer-bg: #1b1b1b;
+  --banner-overlay-bg: rgba(27, 27, 27, 0.6);
+}
+
+/* Light Mode Overrides */
+.light-mode {
+  --background-color: #ffffff;
+  --text-color: #333333;
+  --card-bg-color: #f8f8f8;
+  --header-footer-bg: #ffffff;
+  --banner-overlay-bg: rgba(0, 0, 0, 0.3);
+}
+
+/*-------------------------------------------------
+  RESPONSIVE BREAKPOINTS FOR SLIDER ITEMS
+-------------------------------------------------*/
+@media (max-width: 1200px) {
+  :root { --slider-items: 4; }
+}
+@media (max-width: 992px) {
+  :root { --slider-items: 3; }
+}
+@media (max-width: 768px) {
+  :root { --slider-items: 2; }
+}
+
+/*-------------------------------------------------
+  RESET & GLOBAL STYLES
+-------------------------------------------------*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: all var(--transition-speed) var(--transition-easing);
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: var(--font-family);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/*-------------------------------------------------
+  TOP NAVBAR
+-------------------------------------------------*/
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--header-footer-bg);
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 2rem;
+  z-index: 1000;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.top-nav .logo {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.top-nav .nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.top-nav .nav-links li a {
+  text-decoration: none;
+  color: var(--text-color);
+  transition: opacity var(--transition-speed);
+}
+
+.top-nav .nav-links li a:hover {
+  opacity: 0.7;
+}
+
+.hamburger {
+  display: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.theme-toggle-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.3rem;
+  color: var(--text-color);
+  margin-left: 1rem;
+  transition: color var(--transition-speed);
+}
+
+.theme-toggle-btn:hover {
+  color: var(--secondary-color);
+}
+
+/*-------------------------------------------------
+  SIDEBAR
+-------------------------------------------------*/
+.sidebar {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 200px;
+  height: calc(100% - 60px);
+  background: var(--card-bg-color);
+  padding: 1rem 0;
+  overflow-y: auto;
+  z-index: 999;
+  transform: translateX(0);
+  transition: transform var(--transition-speed) var(--transition-easing);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.profile-picture {
+  width: 80px;
+  height: 80px;
+  background: url('https://via.placeholder.com/80') center/cover no-repeat;
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+}
+
+.profile-name {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.sidebar-links {
+  list-style: none;
+  margin-top: 1rem;
+}
+
+.sidebar-links li {
+  margin: 0.5rem 0;
+}
+
+.sidebar-links li a {
+  color: var(--text-color);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  display: block;
+  transition: background var(--transition-speed);
+}
+
+.sidebar-links li a:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/*-------------------------------------------------
+  MAIN CONTENT
+-------------------------------------------------*/
+.main-content {
+  margin-left: 200px;
+  margin-top: 60px;
+  padding: 1rem 2rem;
+}
+
+/*-------------------------------------------------
+  BANNER SLIDER
+-------------------------------------------------*/
+.banner-slider-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  height: 300px;
+}
+
+.banner-slider {
+  display: flex;
+  transition: transform 0.5s ease;
+  height: 100%;
+}
+
+.banner-slide {
+  min-width: 100%;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  display: none;
+}
+
+.banner-slide.active {
+  display: block;
+}
+
+.banner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--banner-overlay-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  opacity: 0;
+  animation: fadeIn 1.2s forwards 0.3s;
+}
+
+.banner-overlay h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.banner-overlay p {
+  font-size: 1rem;
+}
+
+.banner-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.4);
+  border: none;
+  color: #fff;
+  padding: 0.5rem;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 10;
+  transition: background var(--transition-speed);
+}
+
+.banner-arrow:hover {
+  background: var(--secondary-color);
+}
+
+.banner-arrow-left {
+  left: 1rem;
+}
+
+.banner-arrow-right {
+  right: 1rem;
+}
+
+/*-------------------------------------------------
+  SECTION HEADERS
+-------------------------------------------------*/
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.section-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.show-all-btn {
+  background: var(--secondary-color);
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background var(--transition-speed);
+}
+
+.show-all-btn:hover {
+  background: #ffca2c;
+}
+
+/*-------------------------------------------------
+  SLIDER CONTAINERS & CARDS
+-------------------------------------------------*/
+.flash-sale-section,
+.valorant-section,
+.pubg-section {
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+/* 
+   Container with a fixed max-width for desktop. 
+   Overflow hidden removed to avoid cutting items.
+*/
+.slider-container {
+  position: relative;
+  /* overflow: hidden;  <-- REMOVED to avoid cutting items */
+  padding: 1rem;
+  margin: 0 auto;
+  max-width: 1200px;
+  background: transparent;
+}
+
+.card-track {
+  display: grid;
+  grid-auto-flow: column;
+  /* Let each card define its own min-content width */
+  grid-auto-columns: min-content;
+  gap: var(--card-gap);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 1rem;
+  -webkit-overflow-scrolling: touch;
+  /* Added smooth scrolling */
+  scroll-behavior: smooth;
+}
+
+.card-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* 
+   Use var(--card-bg-color) for background so it respects dark mode
+*/
+.slider-card,
+.small-slider-card {
+  scroll-snap-align: start;
+  min-width: 130px;
+  background: var(--card-bg-color);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  padding: 1rem;
+  text-align: center;
+  animation: fadeInLeft 0.6s ease-out forwards;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.slider-card:hover,
+.small-slider-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Image Container */
+.card-image-container {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f0f0f0;
+  position: relative;
+}
+.dark-mode .card-image-container {
+  background: #2a2a2a;
+}
+
+.slider-card-image,
+.small-slider-card-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+/* Card Content */
+.card-content {
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.card-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.price-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.discounted-price {
+  color: var(--secondary-color);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+/* Card Badge */
+.card-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--secondary-color);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  z-index: 1;
+}
+
+/*-------------------------------------------------
+  FADE IN & FADE IN UP ANIMATIONS
+-------------------------------------------------*/
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/*-------------------------------------------------
+  ARROW BUTTONS FOR SLIDERS
+-------------------------------------------------*/
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slider-container:hover .arrow {
+  opacity: 1;
+}
+
+.arrow-left {
+  left: 0.5rem;
+}
+
+.arrow-right {
+  right: 0.5rem;
+}
+
+.arrow:hover {
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.hidden {
+  display: none;
+}
+
+/*-------------------------------------------------
+  NEWS SECTION
+-------------------------------------------------*/
+.news-section {
+  margin-top: 2rem;
+}
+
+.news-section h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.news-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.news-card {
+  background: var(--card-bg-color);
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow var(--transition-speed);
+}
+
+.news-card:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.news-card img {
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.news-card h3 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+/*-------------------------------------------------
+  ABOUT SECTION
+-------------------------------------------------*/
+.about-section {
+  margin-top: 2rem;
+  background: var(--card-bg-color);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+/*-------------------------------------------------
+  OTHER RESPONSIVE STYLES (Sidebar, Banner, etc.)
+-------------------------------------------------*/
+@media (max-width: 992px) {
+  .sidebar {
+    width: 180px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+  .top-nav .nav-links {
+    display: none;
+  }
+  .sidebar {
+    transform: translateX(-100%);
+  }
+  .sidebar.show-sidebar {
+    transform: translateX(0);
+  }
+  .main-content {
+    margin-left: 0;
+  }
+  .banner-slider-container {
+    height: 250px;
+  }
+  .banner-overlay h1 {
+    font-size: 1.5rem;
+  }
+  .slider-card-image {
+    height: 130px;
+  }
+  .small-slider-card-image {
+    height: 110px;
+  }
+}
+
+@media (max-width: 576px) {
+  .top-nav {
+    padding: 0.5rem 1rem;
+  }
+  .top-nav .logo {
+    font-size: 1.2rem;
+  }
+  .top-nav .nav-links li a {
+    font-size: 0.9rem;
+  }
+  .sidebar {
+    width: 160px;
+  }
+  .main-content {
+    padding: 0.5rem 1rem;
+  }
+  .banner-slider-container {
+    height: 200px;
+  }
+  .banner-overlay h1 {
+    font-size: 1.3rem;
+  }
+  .banner-overlay p {
+    font-size: 0.9rem;
+  }
+  .slider-card,
+  .small-slider-card {
+    position: relative;
+    scroll-snap-align: start;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s ease;
+  }
+}
+
+/*-------------------------------------------------
+  ALL GAMES GRID SECTION
+-------------------------------------------------*/
+.all-games-section {
+  margin-top: 2rem;
+}
+
+.all-games-section h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.games-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+}
+
+.game-card {
+  background: var(--card-bg-color);
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow var(--transition-speed);
+}
+
+.game-card:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.game-card h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  color: var(--text-color);
+}
+
+.game-card p {
+  font-size: 0.85rem;
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+@media (max-width: 480px) {
+  .games-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/*-------------------------------------------------
+  PURCHASE HISTORY PAGE
+-------------------------------------------------*/
+.purchase-history-section {
+  margin-top: 2rem;
+}
+
+.purchase-history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.purchase-history-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.back-btn {
+  background: var(--secondary-color);
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background var(--transition-speed);
+}
+
+.back-btn:hover {
+  background: #ffca2c;
+}
+
+.filter-form {
+  background: var(--card-bg-color);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.filter-group input[type="date"],
+.filter-group input[type="text"],
+.filter-group select {
+  padding: 0.4rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  background: #fff;
+  color: #333;
+  font-size: 0.85rem;
+}
+
+.search-btn {
+  align-self: flex-end;
+  background: var(--secondary-color);
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background var(--transition-speed);
+  margin-top: auto;
+}
+
+.search-btn:hover {
+  background: #ffca2c;
+}
+
+.purchase-table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.purchase-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  border-radius: 8px;
+  min-width: 800px;
+}
+
+.purchase-table thead {
+  background: var(--header-footer-bg);
+}
+
+.purchase-table th,
+.purchase-table td {
+  padding: 0.75rem;
+  text-align: left;
+  font-size: 0.9rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.purchase-table th {
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.purchase-table td {
+  color: var(--text-color);
+}
+
+.no-data {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .filter-row {
+    flex-direction: column;
+  }
+  .filter-group,
+  .search-btn {
+    width: 100%;
+  }
+}
+
+/*-------------------------------------------------
+  ADDITIONAL GLOBAL IMPROVEMENTS
+-------------------------------------------------*/
+button:focus,
+a:focus {
+  outline: 2px solid var(--secondary-color);
+  outline-offset: 2px;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.loading {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  padding: var(--space-sm);
+  background: var(--secondary-color);
+  color: white;
+  z-index: 1001;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+.slider-card-image {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .slider-container {
+    padding: 1rem;
+    margin: 0 auto;
+    max-width: 100%;
+  }
+
+  .card-track {
+    grid-auto-columns: min-content;
+    gap: 1rem;
+  }
+
+  .card-title {
+    font-size: 0.875rem;
+    -webkit-line-clamp: 1;
+  }
+
+  .discounted-price {
+    font-size: 1rem;
+  }
+
+  .arrow {
+    display: flex !important;
+    width: 30px;
+    height: 30px;
+    opacity: 0.7 !important;
+    background: rgba(255, 255, 255, 0.7);
+  }
+
+  .arrow:hover {
+    opacity: 1 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-track {
+    gap: 1rem;
+  }
+
+  .card-content {
+    padding: 0.5rem;
+  }
+
+  .card-badge {
+    font-size: 0.65rem;
+    padding: 3px 6px;
+  }
+}

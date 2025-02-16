@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RoKham Shop</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet" />
+  <!-- Font Awesome (for icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Additional animation styles for slider cards */
+    .slider-card, .small-slider-card {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease-out forwards;
+      /* Add a slight delay for a cascading effect if desired */
+      /* animation-delay: 0.2s; */
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .slider-card:hover, .small-slider-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    /* Optional: Enhance banner slider fade-in animation */
+    .banner-slide {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .banner-slide.active {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="dark-mode" id="body">
+  <!-- Top Navbar -->
+  <nav class="top-nav">
+    <div class="logo">RoKham Shop</div>
+    <div class="hamburger" id="hamburger">
+      <i class="fa fa-bars"></i>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <button class="theme-toggle-btn" id="themeToggleBtn">
+      <i class="fa fa-sun"></i>
+    </button>
+  </nav>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="profile-section">
+      <div class="profile-picture"></div>
+      <h3 class="profile-name">Username</h3>
+    </div>
+    <ul class="sidebar-links">
+      <li><a href="all.html">ALL Games</a></li>
+      <li><a href="history.html">Orders</a></li>
+      <li><a href="#">Wallet</a></li>
+      <li><a href="#">Settings</a></li>
+      <li><a href="#">Logout</a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content" id="home">
+    <!-- Hero Banner Slider -->
+    <section class="banner-slider-container">
+      <div class="banner-slider">
+        <!-- 3 Banner Slides -->
+        <div class="banner-slide active" style="background-image: url('https://via.placeholder.com/1200x300?text=Banner+1');">
+          <div class="banner-overlay">
+            <h1>WELCOME TO ROKHAM SHOP</h1>
+            <p>Discover amazing deals and exclusive offers</p>
+          </div>
+        </div>
+        <div class="banner-slide" style="background-image: url('https://via.placeholder.com/1200x300?text=Banner+2');">
+          <div class="banner-overlay">
+            <h1>NEW ARRIVALS!</h1>
+            <p>Fresh picks just landed — check them out now</p>
+          </div>
+        </div>
+        <div class="banner-slide" style="background-image: url('https://via.placeholder.com/1200x300?text=Banner+3');">
+          <div class="banner-overlay">
+            <h1>BEST DEALS</h1>
+            <p>Grab top items at unbeatable prices</p>
+          </div>
+        </div>
+      </div>
+      <button class="banner-arrow banner-arrow-left" id="bannerArrowLeft">
+        <i class="fa fa-chevron-left"></i>
+      </button>
+      <button class="banner-arrow banner-arrow-right" id="bannerArrowRight">
+        <i class="fa fa-chevron-right"></i>
+      </button>
+    </section>
+
+    <!-- Flash Sale Section (6 Items) -->
+    <section class="flash-sale-section" id="flash-sale">
+      <div class="section-header">
+        <h2>Flash Sale</h2>
+        <!-- "Show All" now links to all.html -->
+        <a href="all.html" class="show-all-btn">Show All</a>
+      </div>
+      <div class="slider-container">
+        <button class="arrow arrow-left" id="flashSaleArrowLeft">
+          <i class="fa fa-chevron-left"></i>
+        </button>
+        <div class="card-track" id="flashSaleTrack">
+          <!-- 6 Cards for Flash Sale -->
+          <!-- 1 -->
+          <div class="slider-card">
+            <div class="card-image-container">
+              <div class="card-badge">-20%</div>
+              <div class="slider-card-image" style="background-image: url('https://via.placeholder.com/300x300?text=Flash+1');"></div>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">Flash Gadget 1</h3>
+              <div class="price-container">
+                <span class="original-price">$100</span>
+                <span class="discounted-price">$80</span>
+              </div>
+            </div>
+          </div>
+          <!-- 2 -->
+          <div class="slider-card">
+            <div class="card-image-container">
+              <div class="card-badge">-25%</div>
+              <div class="slider-card-image" style="background-image: url('https://via.placeholder.com/300x300?text=Flash+2');"></div>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">Flash Gadget 2</h3>
+              <div class="price-container">
+                <span class="original-price">$200</span>
+                <span class="discounted-price">$150</span>
+              </div>
+            </div>
+          </div>
+          <!-- 3 -->
+          <div class="slider-card">
+            <div class="card-image-container">
+              <div class="card-badge">-10%</div>
+              <div class="slider-card-image" style="background-image: url('https://via.placeholder.com/300x300?text=Flash+3');"></div>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">Flash Gadget 3</h3>
+              <div class="price-container">
+                <span class="original-price">$150</span>
+                <span class="discounted-price">$135</span>
+              </div>
+            </div>
+          </div>
+          <!-- 4 -->
+          <div class="slider-card">
+            <div class="card-image-container">
+              <div class="card-badge">-15%</div>
+              <div class="slider-card-image" style="background-image: url('https://via.placeholder.com/300x300?text=Flash+4');"></div>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">Flash Gadget 4</h3>
+              <div class="price-container">
+                <span class="original-price">$80</span>
+                <span class="discounted-price">$68</span>
+              </div>
+            </div>
+          </div>
+          <!-- 5 -->
+          <div class="slider-card">
+            <div class="card-image-container">
+              <div class="card-badge">-30%</div>
+              <div class="slider-card-image" style="background-image: url('https://via.placeholder.com/300x300?text=Flash+5');"></div>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">Flash Gadget 5</h3>
+              <div class="price-container">
+                <span class="original-price">$300</span>
+                <span class="discounted-price">$210</span>
+              </div>
+            </div>
+          </div>
+          <!-- 6 -->
+          <div class="slider-card">
+            <div class="card-image-container">
+              <div class="card-badge">-20%</div>
+              <div class="slider-card-image" style="background-image: url('https://via.placeholder.com/300x300?text=Flash+6');"></div>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">Flash Gadget 6</h3>
+              <div class="price-container">
+                <span class="original-price">$90</span>
+                <span class="discounted-price">$72</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="arrow arrow-right" id="flashSaleArrowRight">
+          <i class="fa fa-chevron-right"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- Valorant Deals Section (6 Items) -->
+    <section class="valorant-section" id="valorant">
+      <div class="section-header">
+        <h2>Valorant Deals</h2>
+        <!-- "Show All" button now links to all.html -->
+        <a href="all.html" class="show-all-btn">Show All</a>
+      </div>
+      <div class="slider-container">
+        <button class="arrow arrow-left" id="valorantArrowLeft">
+          <i class="fa fa-chevron-left"></i>
+        </button>
+        <div class="card-track" id="valorantTrack">
+          <!-- 6 Cards for Valorant -->
+          <!-- 1 -->
+          <div class="small-slider-card">
+            <div class="card-image-container">
+              <div class="card-badge">NEW</div>
+              <div class="small-slider-card-image" style="background-image: url('https://via.placeholder.com/200x200?text=Valorant+1');"></div>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">Valorant Skin 1</h3>
+              <div class="price-container">
+                <span class="discounted-price">$20</span>
+              </div>
+            </div>
+          </div>
+          <!-- 2 -->
+          <div class="small-slider-card">
+            <div class="card-image-container">
+              <div class="card-badge">HOT</div>
+              <div class="small-slider-card-image" style="background-image: url('https://via.placeholder.com/200x200?text=Valorant+2');"></div>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">Valorant Skin 2</h3>
+              <div class="price-container">
+                <span class="discounted-price">$25</span>
+              </div>
+            </div>
+          </div>
+          <!-- 3 -->
+          <div class="small-slider-card">
+            <div class="card-image-container">
+              <div class="card-badge">SALE</div>
+              <div class="small-slider-card-image" style="background-image: url('https://via.placeholder.com/200x200?text=Valorant+3');"></div>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">Valorant Skin 3</h3>
+              <div class="price-container">
+                <span class="discounted-price">$18</span>
+              </div>
+            </div>
+          </div>
+          <!-- 4 -->
+          <div class="small-slider-card">
+            <div class="card-image-container">
+              <div class="card-badge">NEW</div>
+              <div class="small-slider-card-image" style="background-image: url('https://via.placeholder.com/200x200?text=Valorant+4');"></div>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">Valorant Skin 4</h3>
+              <div class="price-container">
+                <span class="discounted-price">$30</span>
+              </div>
+            </div>
+          </div>
+          <!-- 5 -->
+          <div class="small-slider-card">
+            <div class="card-image-container">
+              <div class="card-badge">-10%</div>
+              <div class="small-slider-card-image" style="background-image: url('https://via.placeholder.com/200x200?text=Valorant+5');"></div>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">Valorant Skin 5</h3>
+              <div class="price-container">
+                <span class="discounted-price">$27</span>
+              </div>
+            </div>
+          </div>
+          <!-- 6 -->
+          <div class="small-slider-card">
+            <div class="card-image-container">
+              <div class="card-badge">HOT</div>
+              <div class="small-slider-card-image" style="background-image: url('https://via.placeholder.com/200x200?text=Valorant+6');"></div>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">Valorant Skin 6</h3>
+              <div class="price-container">
+                <span class="discounted-price">$22</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="arrow arrow-right" id="valorantArrowRight">
+          <i class="fa fa-chevron-right"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- PUBG Cards Section (6 Items) -->
+    <section class="pubg-section" id="pubg">
+      <div class="section-header">
+        <h2>PUBG Cards</h2>
+        <!-- "Show All" now links to all.html -->
+        <a href="all.html" class="show-all-btn">Show All</a>
+      </div>
+      <div class="slider-container">
+        <button class="arrow arrow-left" id="pubgArrowLeft">
+          <i class="fa fa-chevron-left"></i>
+        </button>
+        <div class="card-track" id="pubgTrack">
+          <!-- 6 Cards for PUBG -->
+          <!-- 1 -->
+          <div class="small-slider-card">
+            <div class="card-image-container">
+              <div class="card-badge">BEST</div>
+              <div class="small-slider-card-image" style="background-image: url('https://via.placeholder.com/200x200?text=PUBG+1');"></div>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">PUBG Royale 1</h3>
+              <div class="price-container">
+                <span class="discounted-price">$70</span>
+              </div>
+            </div>
+          </div>
+          <!-- 2 -->
+          <div class="small-slider-card">
+            <div class="card-image-container">
+              <div class="card-badge">NEW</div>
+              <div class="small-slider-card-image" style="background-image: url('https://via.placeholder.com/200x200?text=PUBG+2');"></div>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">PUBG Royale 2</h3>
+              <div class="price-container">
+                <span class="discounted-price">$50</span>
+              </div>
+            </div>
+          </div>
+          <!-- 3 -->
+          <div class="small-slider-card">
+            <div class="card-image-container">
+              <div class="card-badge">SALE</div>
+              <div class="small-slider-card-image" style="background-image: url('https://via.placeholder.com/200x200?text=PUBG+3');"></div>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">PUBG Royale 3</h3>
+              <div class="price-container">
+                <span class="discounted-price">$40</span>
+              </div>
+            </div>
+          </div>
+          <!-- 4 -->
+          <div class="small-slider-card">
+            <div class="card-image-container">
+              <div class="card-badge">HOT</div>
+              <div class="small-slider-card-image" style="background-image: url('https://via.placeholder.com/200x200?text=PUBG+4');"></div>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">PUBG Royale 4</h3>
+              <div class="price-container">
+                <span class="discounted-price">$60</span>
+              </div>
+            </div>
+          </div>
+          <!-- 5 -->
+          <div class="small-slider-card">
+            <div class="card-image-container">
+              <div class="card-badge">-15%</div>
+              <div class="small-slider-card-image" style="background-image: url('https://via.placeholder.com/200x200?text=PUBG+5');"></div>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">PUBG Royale 5</h3>
+              <div class="price-container">
+                <span class="discounted-price">$34</span>
+              </div>
+            </div>
+          </div>
+          <!-- 6 -->
+          <div class="small-slider-card">
+            <div class="card-image-container">
+              <div class="card-badge">BEST</div>
+              <div class="small-slider-card-image" style="background-image: url('https://via.placeholder.com/200x200?text=PUBG+6');"></div>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">PUBG Royale 6</h3>
+              <div class="price-container">
+                <span class="discounted-price">$75</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="arrow arrow-right" id="pubgArrowRight">
+          <i class="fa fa-chevron-right"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="news-section" id="news">
+      <h2>News & Updates</h2>
+      <div class="news-grid">
+        <div class="news-card">
+          <img src="https://via.placeholder.com/300x150" alt="News" />
+          <h3>Title of News 1</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        <div class="news-card">
+          <img src="https://via.placeholder.com/300x150" alt="News" />
+          <h3>Title of News 2</h3>
+          <p>Vestibulum nec odio ipsum. Suspendisse cursus malesuada facilisis.</p>
+        </div>
+        <div class="news-card">
+          <img src="https://via.placeholder.com/300x150" alt="News" />
+          <h3>Title of News 3</h3>
+          <p>Phasellus pretium quam in massa sagittis, at tristique orci gravida.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+      <h2>About Us</h2>
+      <p>
+        Here is where you can talk about your company, your mission, or anything else you'd like your customers to know about RoKham Shop.
+      </p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
