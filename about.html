@@ -4,52 +4,232 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>About RoKham Top-Up</title>
+  
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet" />
+  
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-  <!-- Stylesheet -->
+  
+  <!-- External Stylesheet -->
   <link rel="stylesheet" href="styles.css" />
-  <!-- About Page Extra Styles -->
+  
+  <!-- Merged Inline Styles -->
   <style>
-    /* Hero Section (Full Screen Background) */
+    :root {
+      --primary-color: #2563eb;
+      --secondary-color: #ffc107;
+      --gradient-start: #1a1a1a;
+      --gradient-end: #2d2d2d;
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --card-bg-color: #f9f9f9;
+      /* Default theme variables (for light mode) */
+      --background-color: #ffffff;
+      --text-color: #333333;
+      --header-footer-bg: #ffffff;
+    }
+    
+    /* Dark Mode overrides */
+    .dark-mode {
+      --background-color: #302f2f;
+      --text-color: #f4f4f4;
+      --card-bg-color: #1f1f1f;
+      --header-footer-bg: #1b1b1b;
+    }
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      overflow-x: hidden;
+    }
+    
+    /* ---------- Top Navigation ---------- */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: var(--header-footer-bg);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+    }
+    .top-nav .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .top-nav .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      margin: 0;
+      padding: 0;
+    }
+    .top-nav .nav-links li a {
+      color: var(--text-color);
+      text-decoration: none;
+    }
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      font-size: 1.4rem;
+    }
+    .theme-toggle-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-color);
+      cursor: pointer;
+      font-size: 1.3rem;
+      margin-left: 1rem;
+    }
+    
+    /* ---------- Sidebar ---------- */
+    /* Always visible on desktop */
+    .sidebar {
+      position: fixed;
+      top: 60px;
+      left: 0;
+      width: 200px;
+      height: calc(100% - 60px);
+      background: var(--card-bg-color);
+      padding: 1rem 0;
+      overflow-y: auto;
+      z-index: 999;
+      border-right: 1px solid rgba(0, 0, 0, 0.1);
+      /* For mobile: we'll hide it by default */
+      transition: transform 0.3s ease;
+    }
+    .sidebar-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .sidebar-links li {
+      margin: 0.5rem 0;
+    }
+    .sidebar-links li a {
+      color: var(--text-color);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      display: block;
+    }
+    
+    /* ---------- Hero Section ---------- */
     .about-hero {
-      position: relative;
-      height: 80vh;
-      background-image: url('https://via.placeholder.com/1200x600?text=Top-Up+Game+Background');
+      height: 100vh;
+      background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end)),
+                  url('https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=1920');
+      background-blend-mode: multiply;
+      background-attachment: fixed;
       background-size: cover;
       background-position: center;
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
+      padding: 0 1rem;
     }
     .hero-overlay {
-      background: rgba(0, 0, 0, 0.5);
-      padding: 2rem;
-      border-radius: 8px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border-radius: 24px;
+      padding: 3rem 4rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+      transform: translateY(20px);
       text-align: center;
       animation: fadeInUp 1s ease-out forwards;
     }
     .hero-overlay h1 {
-      font-size: 2.5rem;
-      color: #fff;
-      margin-bottom: 1rem;
+      font-size: 4rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, #fff, #e0e0e0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      margin-bottom: 1.5rem;
     }
     .hero-overlay p {
       font-size: 1.2rem;
       color: #ddd;
     }
-
-    /* About Info Section */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Scrolling Text Animation */
+    .scrolling-text {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.05);
+      display: flex;
+      white-space: nowrap;
+      align-items: center;
+    }
+    .scrolling-text span {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.3);
+      animation: scroll 20s linear infinite;
+      padding: 0 2rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+    
+    /* ---------- Interactive Particles ---------- */
+    .particle {
+      position: absolute;
+      background: radial-gradient(circle, var(--primary-color) 20%, transparent 70%);
+      pointer-events: none;
+      animation: float 3s infinite ease-in-out;
+      border-radius: 50%;
+      width: 10px;
+      height: 10px;
+      opacity: 0.8;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    
+    /* ---------- About Info Section ---------- */
     .about-info {
       padding: 4rem 2rem;
       text-align: center;
     }
     .about-info h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
+      font-size: 2.5rem;
+      font-weight: 700;
+      position: relative;
+      display: inline-block;
+      margin-bottom: 3rem;
+    }
+    .about-info h2::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: var(--primary-color);
+      border-radius: 2px;
     }
     .about-info p {
       font-size: 1.1rem;
@@ -57,38 +237,50 @@
       max-width: 800px;
       margin: 0 auto 1rem;
     }
-
-    /* Features Section */
+    
+    /* ---------- Features Section ---------- */
     .about-features {
-      background: var(--card-bg-color);
       padding: 4rem 2rem;
+      background: var(--card-bg-color);
+      color: #000;
+    }
+    .about-features h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #000;
+    }
+    /* Dark mode override for "What We Offer" heading */
+    .dark-mode .about-features h2 {
+      color: #ff8c00;
     }
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
-      max-width: 1000px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 3rem;
+      max-width: 1200px;
       margin: 0 auto;
     }
     .feature-card {
-      background: #fff;
-      border-radius: 12px;
-      padding: 2rem;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      position: relative;
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 2.5rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 0.8s ease-out forwards;
+      color: #fff;
     }
     .feature-card:hover {
-      transform: translateY(0);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      transform: translateY(-8px);
+      background: rgba(59, 130, 246, 0.1);
     }
     .feature-card i {
-      font-size: 3rem;
-      color: var(--secondary-color);
-      margin-bottom: 1rem;
+      display: block;
+      background: linear-gradient(45deg, var(--primary-color), #60a5fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
     }
     .feature-card h3 {
       font-size: 1.5rem;
@@ -96,21 +288,68 @@
     }
     .feature-card p {
       font-size: 1rem;
-      color: #555;
+      /* Default dark mode color for paragraphs */
+      color: #ccc;
     }
-    /* Stagger Animation Delays for Feature Cards */
-    .features-grid .feature-card:nth-child(1) { animation-delay: 0.2s; }
-    .features-grid .feature-card:nth-child(2) { animation-delay: 0.4s; }
-    .features-grid .feature-card:nth-child(3) { animation-delay: 0.6s; }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .glow-hover {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(600px circle at var(--x) var(--y), rgba(59, 130, 246, 0.15), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      border-radius: 24px;
+    }
+    .feature-card:hover .glow-hover {
+      opacity: 1;
+    }
+    
+    /* Light Mode Override for Feature Cards */
+    .light-mode .feature-card {
+      color: var(--text-color);
+      background: var(--card-bg-color);
+      border: 1px solid #ddd;
+    }
+    .light-mode .feature-card p {
+      color: var(--text-color) !important;
+    }
+    .light-mode .feature-card h3 {
+      color: var(--text-color) !important;
+    }
+    
+    /* ---------- Responsive Styles ---------- */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+      .top-nav .nav-links {
+        display: none;
+      }
+      /* On mobile, hide the sidebar by default */
+      .sidebar {
+        transform: translateX(-100%);
+      }
+      .sidebar.show-sidebar {
+        transform: translateX(0);
+      }
+      .main-content {
+        margin-left: 0;
+      }
+      .hero-overlay {
+        padding: 2rem;
+        margin: 0 1rem;
+      }
+      .hero-overlay h1 {
+        font-size: 2.5rem;
+      }
     }
   </style>
 </head>
 <body class="dark-mode" id="body">
-  <!-- Starfall Particle Effect -->
+  <!-- ---------- Starfall Particle Effect ---------- -->
   <div class="starfall">
     <div class="star"></div>
     <div class="star"></div>
@@ -123,8 +362,22 @@
     <div class="star"></div>
     <div class="star"></div>
   </div>
-
-  <!-- Top Navbar -->
+  
+  <!-- ---------- Hero Section with Particles & Scrolling Text ---------- -->
+  <section class="about-hero">
+    <div class="particle" style="top:20%; left:10%; width:12px; height:12px;"></div>
+    <div class="particle" style="top:70%; left:85%; width:15px; height:15px;"></div>
+    <div class="hero-overlay">
+      <h1>Next-Level Game Transactions</h1>
+      <p>Where Innovation Meets Gaming Excellence</p>
+    </div>
+    <div class="scrolling-text" aria-hidden="true">
+      <span>SECURE • RELIABLE • FAST • TRUSTED • PREMIUM •</span>
+      <span>SECURE • RELIABLE • FAST • TRUSTED • PREMIUM •</span>
+    </div>
+  </section>
+  
+  <!-- ---------- Top Navigation ---------- -->
   <nav class="top-nav">
     <div class="logo">RoKham Shop</div>
     <div class="hamburger" id="hamburger">
@@ -139,13 +392,9 @@
       <i class="fa fa-sun"></i>
     </button>
   </nav>
-
-  <!-- Sidebar -->
+  
+  <!-- ---------- Sidebar (Profile Removed) ---------- -->
   <aside class="sidebar" id="sidebar">
-    <div class="profile-section">
-      <div class="profile-picture"></div>
-      <h3 class="profile-name">Username</h3>
-    </div>
     <ul class="sidebar-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="all.html">ALL Games</a></li>
@@ -154,48 +403,81 @@
       <li><a href="#">Logout</a></li>
     </ul>
   </aside>
-
-  <!-- Main Content -->
-  <main class="main-content">
-    <!-- Hero Section -->
-    <section class="about-hero">
-      <div class="hero-overlay">
-        <h1>Revolutionizing Game Top-Ups</h1>
-        <p>Experience seamless, secure, and fast top-ups designed with the elegance of Apple products.</p>
-      </div>
-    </section>
-
-    <!-- About Info -->
+  
+  <!-- ---------- Main Content ---------- -->
+  <main class="main-content" style="margin-top: 80px;">
+    <!-- About Info Section -->
     <section class="about-info">
       <h2>Our Story</h2>
       <p>At RoKham Shop, we believe that topping up your favorite games should be as smooth and intuitive as using an Apple device. Our platform is crafted to deliver lightning-fast transactions, unbeatable security, and a sleek, minimalist interface that puts the power in your hands.</p>
       <p>Inspired by world-class design and engineered for performance, our top-up system ensures you stay ahead in the game. Whether you're a hardcore gamer or a casual player, our goal is to redefine the gaming experience with innovation and style.</p>
     </section>
-
+    
     <!-- Features Section -->
     <section class="about-features">
-      <h2 style="text-align: center; margin-bottom: 2rem;">What We Offer</h2>
+      <h2>What We Offer</h2>
       <div class="features-grid">
         <div class="feature-card">
           <i class="fa fa-rocket"></i>
           <h3>Fast Transactions</h3>
           <p>Enjoy near-instant top-ups that keep you in the action without any delay.</p>
+          <div class="glow-hover"></div>
         </div>
         <div class="feature-card">
           <i class="fa fa-lock"></i>
           <h3>Secure Payments</h3>
           <p>Your transactions are protected with state-of-the-art security protocols.</p>
+          <div class="glow-hover"></div>
         </div>
         <div class="feature-card">
           <i class="fa fa-mobile-alt"></i>
           <h3>Mobile Optimized</h3>
           <p>Seamless experience on all devices—gaming on the go has never been easier.</p>
+          <div class="glow-hover"></div>
+        </div>
+        <div class="feature-card">
+          <i class="fa fa-bolt-lightning"></i>
+          <h3>Instant Power-Ups</h3>
+          <p>Accelerated processing powered by cloud technology.</p>
+          <div class="glow-hover"></div>
         </div>
       </div>
     </section>
   </main>
-
-  <!-- JavaScript -->
+  
+  <!-- ---------- JavaScript ---------- -->
+  <script>
+    // Theme Toggle Functionality (Toggle between dark-mode and light-mode)
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const body = document.getElementById('body');
+    themeToggleBtn.addEventListener('click', () => {
+      if (body.classList.contains('dark-mode')) {
+        body.classList.remove('dark-mode');
+        body.classList.add('light-mode');
+        themeToggleBtn.querySelector('i').classList.replace('fa-sun', 'fa-moon');
+      } else {
+        body.classList.remove('light-mode');
+        body.classList.add('dark-mode');
+        themeToggleBtn.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+      }
+    });
+    
+    // Sidebar Hamburger Toggle (only active in mobile view)
+    const hamburger = document.getElementById('hamburger');
+    const sidebar = document.getElementById('sidebar');
+    hamburger.addEventListener('click', () => {
+      sidebar.classList.toggle('show-sidebar');
+    });
+    
+    // Mouse Tracking for Glow Hover Effect on Feature Cards
+    document.querySelectorAll('.feature-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--x', `${e.clientX - rect.left}px`);
+        card.style.setProperty('--y', `${e.clientY - rect.top}px`);
+      });
+    });
+  </script>
   <script src="script.js"></script>
 </body>
 </html>
