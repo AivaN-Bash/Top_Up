@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About RoKham Top-Up</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+  <!-- About Page Extra Styles -->
+  <style>
+    /* Hero Section (Full Screen Background) */
+    .about-hero {
+      position: relative;
+      height: 80vh;
+      background-image: url('https://via.placeholder.com/1200x600?text=Top-Up+Game+Background');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-overlay {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 2rem;
+      border-radius: 8px;
+      text-align: center;
+      animation: fadeInUp 1s ease-out forwards;
+    }
+    .hero-overlay h1 {
+      font-size: 2.5rem;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+    .hero-overlay p {
+      font-size: 1.2rem;
+      color: #ddd;
+    }
+
+    /* About Info Section */
+    .about-info {
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    .about-info h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .about-info p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto 1rem;
+    }
+
+    /* Features Section */
+    .about-features {
+      background: var(--card-bg-color);
+      padding: 4rem 2rem;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .feature-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+    .feature-card:hover {
+      transform: translateY(0);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+    .feature-card i {
+      font-size: 3rem;
+      color: var(--secondary-color);
+      margin-bottom: 1rem;
+    }
+    .feature-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .feature-card p {
+      font-size: 1rem;
+      color: #555;
+    }
+    /* Stagger Animation Delays for Feature Cards */
+    .features-grid .feature-card:nth-child(1) { animation-delay: 0.2s; }
+    .features-grid .feature-card:nth-child(2) { animation-delay: 0.4s; }
+    .features-grid .feature-card:nth-child(3) { animation-delay: 0.6s; }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="dark-mode" id="body">
+  <!-- Starfall Particle Effect -->
+  <div class="starfall">
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+  </div>
+
+  <!-- Top Navbar -->
+  <nav class="top-nav">
+    <div class="logo">RoKham Shop</div>
+    <div class="hamburger" id="hamburger">
+      <i class="fa fa-bars"></i>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <button class="theme-toggle-btn" id="themeToggleBtn">
+      <i class="fa fa-sun"></i>
+    </button>
+  </nav>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="profile-section">
+      <div class="profile-picture"></div>
+      <h3 class="profile-name">Username</h3>
+    </div>
+    <ul class="sidebar-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="all.html">ALL Games</a></li>
+      <li><a href="history.html">Orders</a></li>
+      <li><a href="#">Login</a></li>
+      <li><a href="#">Logout</a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Hero Section -->
+    <section class="about-hero">
+      <div class="hero-overlay">
+        <h1>Revolutionizing Game Top-Ups</h1>
+        <p>Experience seamless, secure, and fast top-ups designed with the elegance of Apple products.</p>
+      </div>
+    </section>
+
+    <!-- About Info -->
+    <section class="about-info">
+      <h2>Our Story</h2>
+      <p>At RoKham Shop, we believe that topping up your favorite games should be as smooth and intuitive as using an Apple device. Our platform is crafted to deliver lightning-fast transactions, unbeatable security, and a sleek, minimalist interface that puts the power in your hands.</p>
+      <p>Inspired by world-class design and engineered for performance, our top-up system ensures you stay ahead in the game. Whether you're a hardcore gamer or a casual player, our goal is to redefine the gaming experience with innovation and style.</p>
+    </section>
+
+    <!-- Features Section -->
+    <section class="about-features">
+      <h2 style="text-align: center; margin-bottom: 2rem;">What We Offer</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <i class="fa fa-rocket"></i>
+          <h3>Fast Transactions</h3>
+          <p>Enjoy near-instant top-ups that keep you in the action without any delay.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fa fa-lock"></i>
+          <h3>Secure Payments</h3>
+          <p>Your transactions are protected with state-of-the-art security protocols.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fa fa-mobile-alt"></i>
+          <h3>Mobile Optimized</h3>
+          <p>Seamless experience on all devices—gaming on the go has never been easier.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>

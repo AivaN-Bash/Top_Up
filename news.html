@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RoKham Shop News</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Extra News Card Animation Styles -->
+  <style>
+    /* News Card Animation */
+    .news-card {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: newsCardFadeIn 0.8s ease-out forwards;
+    }
+    .news-card:hover {
+      transform: scale(1.02);
+    }
+    @keyframes newsCardFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    /* Staggered Animation Delays */
+    .news-grid .news-card:nth-child(1) { animation-delay: 0.1s; }
+    .news-grid .news-card:nth-child(2) { animation-delay: 0.2s; }
+    .news-grid .news-card:nth-child(3) { animation-delay: 0.3s; }
+    .news-grid .news-card:nth-child(4) { animation-delay: 0.4s; }
+    .news-grid .news-card:nth-child(5) { animation-delay: 0.5s; }
+    .news-grid .news-card:nth-child(6) { animation-delay: 0.6s; }
+  </style>
+</head>
+<body class="dark-mode" id="body">
+  <!-- Starfall Particle Effect (Optional) -->
+  <div class="starfall">
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+  </div>
+
+  <!-- Top Navbar -->
+  <nav class="top-nav">
+    <div class="logo">RoKham Shop</div>
+    <div class="hamburger" id="hamburger">
+      <i class="fa fa-bars"></i>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <button class="theme-toggle-btn" id="themeToggleBtn">
+      <i class="fa fa-sun"></i>
+    </button>
+  </nav>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="profile-section">
+      <div class="profile-picture"></div>
+      <h3 class="profile-name">Username</h3>
+    </div>
+    <ul class="sidebar-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="all.html">ALL Games</a></li>
+      <li><a href="history.html">Orders</a></li>
+      <li><a href="#">Login</a></li>
+      <li><a href="#">Logout</a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- News Section -->
+    <section class="news-section" id="news">
+      <h2>Latest News</h2>
+      <div class="news-grid">
+        <div class="news-card">
+          <img src="images/Valo.png" alt="News 1" />
+          <h3>Breaking News: New Game Release</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem.</p>
+        </div>
+        <div class="news-card">
+          <img src="https://via.placeholder.com/300x150?text=News+2" alt="News 2" />
+          <h3>Exclusive: Inside the World of eSports</h3>
+          <p>Vivamus in erat ut urna cursus vestibulum. Fusce vulputate eleifend sapien, id consequat purus commodo.</p>
+        </div>
+        <div class="news-card">
+          <img src="https://via.placeholder.com/300x150?text=News+3" alt="News 3" />
+          <h3>Review: Top 10 Indie Games of the Year</h3>
+          <p>Nulla facilisi. Proin tempus, eros ac aliquam commodo, sapien ipsum sagittis ex, nec condimentum quam erat id dui.</p>
+        </div>
+        <div class="news-card">
+          <img src="https://via.placeholder.com/300x150?text=News+4" alt="News 4" />
+          <h3>Interview: Developer on Future Projects</h3>
+          <p>Integer bibendum turpis eu nulla interdum, sit amet scelerisque arcu hendrerit. Proin sed nibh nec nulla scelerisque commodo.</p>
+        </div>
+        <div class="news-card">
+          <img src="https://via.placeholder.com/300x150?text=News+5" alt="News 5" />
+          <h3>Update: Patch Notes & New Features</h3>
+          <p>Maecenas dignissim, justo nec dignissim condimentum, orci nisi suscipit leo, at ultrices magna augue eget metus.</p>
+        </div>
+        <div class="news-card">
+          <img src="https://via.placeholder.com/300x150?text=News+6" alt="News 6" />
+          <h3>Guide: Tips for Multiplayer Success</h3>
+          <p>Curabitur commodo, nulla eu convallis pharetra, velit metus dignissim ipsum, in placerat justo lacus sit amet nisi.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
