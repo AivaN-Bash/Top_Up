@@ -5,7 +5,6 @@
   /* Default theme variables */
   --background-color: #ffffff;
   --text-color: #333333;
-  /* Card BG references this var, so in dark mode it becomes black(ish). */
   --card-bg-color: #f8f8f8;
   --secondary-color: #ffc107;
   --header-footer-bg: #ffffff;
@@ -13,33 +12,62 @@
 
   --font-family: 'Montserrat', sans-serif;
   --transition-speed: 0.3s;
-  --transition-easing: ease-in-out;
-  --card-gap: 1.5rem; /* Adjust spacing between cards */
+  --transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
+  --card-gap: 1.5rem;
   --space-xs: 0.5rem;
   --space-sm: 1rem;
   --space-md: 1.5rem;
   --space-lg: 2rem;
-
-  /* Show 5 items on very large screens */
   --slider-items: 5;
 }
 
-/* Dark Mode Overrides */
+/*-------------------------------------------------
+  GLOBAL RESET & TRANSITIONS
+-------------------------------------------------*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: background-color var(--transition-speed) var(--transition-easing),
+              transform var(--transition-speed) var(--transition-easing),
+              opacity var(--transition-speed) var(--transition-easing);
+}
+
+body {
+  /* Use gradient background if defined, otherwise fallback */
+  background: var(--background, var(--background-color));
+  color: var(--text-color);
+  font-family: var(--font-family);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/*-------------------------------------------------
+  THEME OVERRIDES
+-------------------------------------------------*/
+/* Dark Mode */
 .dark-mode {
-  --background-color: #121212;
+  --background-color: #302f2f;
   --text-color: #f4f4f4;
   --card-bg-color: #1f1f1f;
   --header-footer-bg: #1b1b1b;
   --banner-overlay-bg: rgba(27, 27, 27, 0.6);
 }
 
-/* Light Mode Overrides */
+/* Light Mode - Softer Gradient Background */
 .light-mode {
-  --background-color: #ffffff;
+  /* Define a gradient background */
+  --background: linear-gradient(135deg, #f0f0f0, #ffffff);
   --text-color: #333333;
   --card-bg-color: #f8f8f8;
-  --header-footer-bg: #ffffff;
-  --banner-overlay-bg: rgba(0, 0, 0, 0.3);
+  --header-footer-bg: #eaeaea;
+  --banner-overlay-bg: rgba(0, 0, 0, 0.2);
+  --secondary-color: #ff8c00;
 }
 
 /*-------------------------------------------------
@@ -53,29 +81,6 @@
 }
 @media (max-width: 768px) {
   :root { --slider-items: 2; }
-}
-
-/*-------------------------------------------------
-  RESET & GLOBAL STYLES
--------------------------------------------------*/
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  transition: all var(--transition-speed) var(--transition-easing);
-}
-
-body {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  font-family: var(--font-family);
-  line-height: 1.5;
-  overflow-x: hidden;
-}
-
-img {
-  display: block;
-  max-width: 100%;
 }
 
 /*-------------------------------------------------
@@ -110,7 +115,6 @@ img {
 .top-nav .nav-links li a {
   text-decoration: none;
   color: var(--text-color);
-  transition: opacity var(--transition-speed);
 }
 
 .top-nav .nav-links li a:hover {
@@ -130,7 +134,6 @@ img {
   font-size: 1.3rem;
   color: var(--text-color);
   margin-left: 1rem;
-  transition: color var(--transition-speed);
 }
 
 .theme-toggle-btn:hover {
@@ -151,7 +154,6 @@ img {
   overflow-y: auto;
   z-index: 999;
   transform: translateX(0);
-  transition: transform var(--transition-speed) var(--transition-easing);
   border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 
@@ -189,7 +191,6 @@ img {
   text-decoration: none;
   padding: 0.5rem 1rem;
   display: block;
-  transition: background var(--transition-speed);
 }
 
 .sidebar-links li a:hover {
@@ -220,6 +221,7 @@ img {
   display: flex;
   transition: transform 0.5s ease;
   height: 100%;
+  perspective: 1000px;
 }
 
 .banner-slide {
@@ -228,10 +230,13 @@ img {
   background-size: cover;
   position: relative;
   display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
 }
 
 .banner-slide.active {
   display: block;
+  opacity: 1;
 }
 
 .banner-overlay {
@@ -246,8 +251,13 @@ img {
   align-items: center;
   justify-content: center;
   text-align: center;
-  opacity: 0;
-  animation: fadeIn 1.2s forwards 0.3s;
+  animation: overlayFade 0.8s ease-out forwards 0.3s;
+  background: linear-gradient(45deg, rgba(38,38,38,0.9) 0%, rgba(38,38,38,0.6) 100%);
+}
+
+@keyframes overlayFade {
+  0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .banner-overlay h1 {
@@ -271,7 +281,6 @@ img {
   cursor: pointer;
   border-radius: 50%;
   z-index: 10;
-  transition: background var(--transition-speed);
 }
 
 .banner-arrow:hover {
@@ -308,8 +317,6 @@ img {
   padding: 0.6rem 1rem;
   border-radius: 4px;
   cursor: pointer;
-  font-weight: 600;
-  transition: background var(--transition-speed);
 }
 
 .show-all-btn:hover {
@@ -326,13 +333,8 @@ img {
   position: relative;
 }
 
-/* 
-   Container with a fixed max-width for desktop. 
-   Overflow hidden removed to avoid cutting items.
-*/
 .slider-container {
   position: relative;
-  /* overflow: hidden;  <-- REMOVED to avoid cutting items */
   padding: 1rem;
   margin: 0 auto;
   max-width: 1200px;
@@ -342,14 +344,12 @@ img {
 .card-track {
   display: grid;
   grid-auto-flow: column;
-  /* Let each card define its own min-content width */
   grid-auto-columns: min-content;
   gap: var(--card-gap);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   padding-bottom: 1rem;
   -webkit-overflow-scrolling: touch;
-  /* Added smooth scrolling */
   scroll-behavior: smooth;
 }
 
@@ -357,9 +357,6 @@ img {
   display: none;
 }
 
-/* 
-   Use var(--card-bg-color) for background so it respects dark mode
-*/
 .slider-card,
 .small-slider-card {
   scroll-snap-align: start;
@@ -370,14 +367,17 @@ img {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   padding: 1rem;
   text-align: center;
-  animation: fadeInLeft 0.6s ease-out forwards;
-  transition: transform 0.3s, box-shadow 0.3s;
+  /* Using fadeInUp animation */
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease-out forwards;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .slider-card:hover,
 .small-slider-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
 /* Card Image Container */
@@ -402,7 +402,6 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
 }
 
 /* Card Content */
@@ -456,7 +455,7 @@ img {
 }
 
 /*-------------------------------------------------
-  FADE IN & FADE IN UP ANIMATIONS
+  ANIMATIONS
 -------------------------------------------------*/
 @keyframes fadeInUp {
   from {
@@ -469,21 +468,20 @@ img {
   }
 }
 
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
-
 @keyframes fadeInLeft {
   from {
     opacity: 0;
-    transform: translateX(-20px);
+    transform: translateX(-30px);
   }
   to {
     opacity: 1;
     transform: translateX(0);
   }
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
 /*-------------------------------------------------
@@ -500,11 +498,11 @@ img {
   border-radius: 50%;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .slider-container:hover .arrow {
@@ -522,6 +520,7 @@ img {
 .arrow:hover {
   background: #fff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: scale(1.1);
 }
 
 .hidden {
@@ -552,7 +551,6 @@ img {
   border-radius: 10px;
   padding: 1rem;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-  transition: box-shadow var(--transition-speed);
 }
 
 .news-card:hover {
@@ -582,7 +580,7 @@ img {
 }
 
 /*-------------------------------------------------
-  OTHER RESPONSIVE STYLES (Sidebar, Banner, etc.)
+  RESPONSIVE STYLES
 -------------------------------------------------*/
 @media (max-width: 992px) {
   .sidebar {
@@ -618,6 +616,29 @@ img {
   .small-slider-card-image {
     height: 110px;
   }
+  .slider-container {
+    padding: 1rem;
+    max-width: 100%;
+  }
+  .card-track {
+    gap: 1rem;
+  }
+  .card-title {
+    font-size: 0.875rem;
+    -webkit-line-clamp: 1;
+  }
+  .discounted-price {
+    font-size: 1rem;
+  }
+  .arrow {
+    width: 30px;
+    height: 30px;
+    opacity: 0.7;
+    background: rgba(255, 255, 255, 0.7);
+  }
+  .arrow:hover {
+    opacity: 1;
+  }
 }
 
 @media (max-width: 576px) {
@@ -645,15 +666,21 @@ img {
   .banner-overlay p {
     font-size: 0.9rem;
   }
-  .slider-card,
-  .small-slider-card {
-    position: relative;
-    scroll-snap-align: start;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                box-shadow 0.3s ease;
+}
+
+@media (max-width: 480px) {
+  .games-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .card-track {
+    gap: 1rem;
+  }
+  .card-content {
+    padding: 0.5rem;
+  }
+  .card-badge {
+    font-size: 0.65rem;
+    padding: 3px 6px;
   }
 }
 
@@ -682,7 +709,6 @@ img {
   padding: 1rem;
   text-align: center;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-  transition: box-shadow var(--transition-speed);
 }
 
 .game-card:hover {
@@ -700,12 +726,6 @@ img {
   font-size: 0.85rem;
   color: var(--text-color);
   opacity: 0.8;
-}
-
-@media (max-width: 480px) {
-  .games-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 /*-------------------------------------------------
@@ -734,8 +754,6 @@ img {
   padding: 0.6rem 1rem;
   border-radius: 4px;
   cursor: pointer;
-  font-weight: 600;
-  transition: background var(--transition-speed);
 }
 
 .back-btn:hover {
@@ -786,8 +804,6 @@ img {
   padding: 0.6rem 1rem;
   border-radius: 4px;
   cursor: pointer;
-  font-weight: 600;
-  transition: background var(--transition-speed);
   margin-top: auto;
 }
 
@@ -804,7 +820,6 @@ img {
   width: 100%;
   border-collapse: collapse;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
   border-radius: 8px;
   min-width: 800px;
 }
@@ -847,17 +862,12 @@ img {
 }
 
 /*-------------------------------------------------
-  ADDITIONAL GLOBAL IMPROVEMENTS
+  ACCESSIBILITY & GLOBAL IMPROVEMENTS
 -------------------------------------------------*/
 button:focus,
 a:focus {
   outline: 2px solid var(--secondary-color);
   outline-offset: 2px;
-}
-
-@keyframes loading {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
 }
 
 .loading {
@@ -881,64 +891,221 @@ a:focus {
   top: 0;
 }
 
-.slider-card-image {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+/*-------------------------------------------------
+  STARFALL PARTICLE ANIMATION
+-------------------------------------------------*/
+/* Container for the starfall effect */
+.starfall {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
+/* Style for individual falling stars */
+.star {
+  position: absolute;
+  top: -10px;
+  width: 3px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  opacity: 0;
+  animation: starFall 3s linear infinite;
+  will-change: transform, opacity;
+}
+
+/* Randomize star positions and delays */
+.star:nth-child(1) { left: 10%; animation-delay: 0s; }
+.star:nth-child(2) { left: 25%; animation-delay: 1s; }
+.star:nth-child(3) { left: 40%; animation-delay: 0.5s; }
+.star:nth-child(4) { left: 55%; animation-delay: 1.5s; }
+.star:nth-child(5) { left: 70%; animation-delay: 0.8s; }
+.star:nth-child(6) { left: 85%; animation-delay: 0.3s; }
+.star:nth-child(7) { left: 15%; animation-delay: 1.2s; }
+.star:nth-child(8) { left: 35%; animation-delay: 0.7s; }
+.star:nth-child(9) { left: 60%; animation-delay: 0.9s; }
+.star:nth-child(10) { left: 80%; animation-delay: 0.4s; }
+
+@keyframes starFall {
+  0% {
+    transform: translateY(0) scale(0.8);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) scale(1);
+    opacity: 0;
   }
 }
 
-@media (max-width: 768px) {
-  .slider-container {
-    padding: 1rem;
-    margin: 0 auto;
-    max-width: 100%;
-  }
-
-  .card-track {
-    grid-auto-columns: min-content;
-    gap: 1rem;
-  }
-
-  .card-title {
-    font-size: 0.875rem;
-    -webkit-line-clamp: 1;
-  }
-
-  .discounted-price {
-    font-size: 1rem;
-  }
-
-  .arrow {
-    display: flex !important;
-    width: 30px;
-    height: 30px;
-    opacity: 0.7 !important;
-    background: rgba(255, 255, 255, 0.7);
-  }
-
-  .arrow:hover {
-    opacity: 1 !important;
-  }
+/* Dark Mode tweaks for starfall */
+.dark-mode .star {
+  background: rgba(255, 255, 255, 0.9);
 }
 
-@media (max-width: 480px) {
-  .card-track {
-    gap: 1rem;
-  }
+/* Light Mode tweaks for starfall (darker particles for contrast) */
+.light-mode .star {
+  background: rgba(0, 0, 0, 0.4);
+}
 
-  .card-content {
-    padding: 0.5rem;
-  }
+/*-------------------------------------------------
+  LOGIN PAGE SPECIFIC STYLES (if applicable)
+-------------------------------------------------*/
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+  background: linear-gradient(135deg, var(--secondary-color) 0%, #ff6b6b 100%);
+}
 
-  .card-badge {
-    font-size: 0.65rem;
-    padding: 3px 6px;
-  }
+.login-card {
+  background: var(--card-bg-color);
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  width: 100%;
+  max-width: 400px;
+  transform: translateY(20px);
+  opacity: 0;
+  animation: fadeInUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.login-header h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.login-header p {
+  color: rgba(51,51,51,0.8);
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid rgba(51,51,51,0.1);
+  border-radius: 8px;
+  background: var(--background-color);
+  color: var(--text-color);
+}
+
+.form-group label {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: all 0.3s ease;
+  color: rgba(51,51,51,0.6);
+  background: var(--background-color);
+  padding: 0 5px;
+}
+
+.form-group input:focus ~ label,
+.form-group input:valid ~ label {
+  top: -10px;
+  font-size: 0.8rem;
+  color: var(--secondary-color);
+}
+
+.focus-border {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--secondary-color);
+  transition: width 0.3s ease;
+}
+
+.form-group input:focus ~ .focus-border {
+  width: 100%;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 1rem;
+  background: var(--secondary-color);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+}
+
+.social-login {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.social-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-btn:hover {
+  transform: translateY(-3px);
+}
+
+.social-btn.fb {
+  background: #1877f2;
+}
+
+.social-btn.google {
+  background: #fff;
+  border: 1px solid #ddd;
+}
+
+.login-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: rgba(51,51,51,0.8);
+}
+
+.login-footer a {
+  color: var(--secondary-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.social-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: #fff;
+}
+
+.social-btn.google svg {
+  fill: #4285f4;
 }
